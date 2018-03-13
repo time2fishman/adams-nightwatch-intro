@@ -33,13 +33,13 @@ We have here a basic calculator app that you will be utilizing to start your tes
 
 ### Setup
 
-To begin, fork and clone this repository. Once it has finished downloading `cd` into the project root and run `npm i` to fetch the project dependencies. After they are fetched run `npm start` and a browser window will open at `http://localhost:3000` displaying a (fully functional) calculator app.
+To begin, clone this repository to your machine. Once it has finished downloading `cd` into the project root and run `npm i` to install the project dependencies. After they are fetched run `npm start` and a browser window will open at `http://localhost:3000` displaying a (fully functional) calculator app.
 
-* You will need to write up a `nightwatchProps.js` file, or copy one from another repository if you already have one.  There are some detailed instructions below on setting one up.
+* You will need to write up a `nightwatch.props.js` file, or copy one from another repository if you already have one.  There are some detailed instructions below on setting one up.
 
 <details>
 
-<summary> <code> nightwatchProps.js </code> </summary>
+<summary> <code> nightwatch.props.js </code> </summary>
 
 <br />
 
@@ -48,7 +48,7 @@ In this file we'll store the path to the `testing-resources` folder you created 
 ```js
 module.exports = {
     resourcePath : "/Users/ajlarson/src/testing-resources/",
-    seleniumServer: "selenium-server-standalone-3.6.0.jar",
+    seleniumServer: "selenium-server-standalone-3.11.0.jar", //or whatever version you have
     chromedriver: "chromedriver"
 }
 ```
@@ -155,6 +155,7 @@ For this assignment, we will forgo the need of formal test plans and test cases 
 * The test case would consist of the calculation to perform, and the expected result
 * Create one simple test in the `step1/tests/tests.js` file.
 * You can use plain strings for your `selectors` (i.e. `'button[name="equalsButton"]'` instead of something like `selectors.buttons.equal`)
+* Finally, create at least TWO more test cases on your own for this calculator, following the same pattern as in the earlier step.
 
 <details>
 
@@ -187,7 +188,9 @@ Your `tests.js` file already exists in the `nightwatch/step1/tests` folder, and 
 
 Remember, in objects, you have comma separated properties, and each property is comprised of a key and a value.  So in our test object `'2+2=4'` is now the key of a new property, and `browser => {}` is the value of the new property.
 
-Populating this new test ought to be fairly straightforward.  We need to click the buttons, then read the final solution.  Use the **Inspector** tool in Google Chrome to build your selectors.  Remember when building your selector that any CSS selector will work (you can get more info [here](https://www.w3schools.com/cssref/css_selectors.asp) on building selectors), but the ones that follow a `tag[attributeName=attributeValue]` format are the most effective in my experience.  These will help Nightwatch know EXACTLY what element (item in the page) to interact with.  For any test, you need selectors for anything you interact with, as well as anything you need to read/verify.  If I were going to pull selectors from this project, just for the test case listed above, they'll be for the `2`, `4`, `+` and `=` buttons.
+Populating this new test ought to be fairly straightforward.  We need to click the buttons, then read the final solution.  Use the **Inspector** tool in Google Chrome to build your selectors.  Remember when building your selector that any CSS or XPath selector will work (you can get more info [here](https://www.w3schools.com/cssref/css_selectors.asp) on building selectors), but the ones that follow a `tag[attributeName=attributeValue]` format are the most effective in my experience.  These will help Nightwatch know EXACTLY what element (item in the page) to interact with.  For any test, you need selectors for anything you interact with, as well as anything you need to read/verify.  If I were going to pull selectors from this project, just for the test case listed above, they'll be for the `2`, `4`, `+` and `=` buttons, then the result display.
+
+Note: Try to pull them on your own, but you can verify them below (as well as with the `$$()` or `$x()` Chrome console functions).
 
 <details>
 
@@ -244,6 +247,10 @@ After I've saved this test, I can run the `step1` tests using the command `npm r
 <img src="https://raw.githubusercontent.com/devmtn-aj/nightwatch-introduction/solution/readme-assets/step1Results.png"/>
 
 If you have any errors to debug, you can do so... You can also check your code against the solution below.
+
+Now you can go ahead and write two additional tests, using the same steps you followed for the first test, choosing a different mathematical formula of course.
+
+Test your tests on occasion by saving the file then using the command `npm run step1`.
 
 </details>
 
@@ -884,6 +891,7 @@ module.exports = {
     uiChecker: uiChecker,
     buttonClicker: buttonClicker
 }
+```
 
 </details>
 
@@ -2346,7 +2354,7 @@ module.exports = {
 }
 ```
 
-Now.  With our function ready to go, we can refactor an existing test.  I'll explain one.  Here's where `2+2=4` stands in our `tests.js` file:
+Now, with our function ready to go, we can refactor an existing test.  I'll explain one.  Here's where `2+2=4` stands in our `tests.js` file:
 
 ```js
     '2+2=4' : browser => {

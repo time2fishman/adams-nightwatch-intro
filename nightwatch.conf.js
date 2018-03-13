@@ -1,4 +1,4 @@
-const properties = require('./nightwatchProps')
+const properties = require('./nightwatch.props')
 module.exports = {
     "src_folders" : "nightwatch/tests",    
   
