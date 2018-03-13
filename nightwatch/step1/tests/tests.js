@@ -7,15 +7,18 @@ module.exports = {
     },
 
     '3+3=6': browser => {
-        browser.waitForElementVisible('button[name="3Button"]', 3000)
-        browser.expect.element('span[name="result"]').text.to.equal('0')
-        browser.click('button[name="3Button"]')
-        browser.expect.element('span[name="result"]').text.to.equal('3')
-        browser.click('button[name="addButton"]')
-        browser.expect.element('span[name="result"]').text.to.equal('0')
-        browser.click('button[name="3Button"]')
-        browser.expect.element('span[name="result"]').text.to.equal('3')
-        browser.click('button[name="equalsButton"]')
-        browser.expect.element('span[name="result"]').text.to.equal('6')
+        browser.useXpath()
+        browser.waitForElementVisible('//*[@id="root"]/main/div[2]/section[1]/button[12]', 3000)
+        browser.expect.element('//*[@id="root"]/main/div[1]/span').text.to.equal('0')
+        browser.click('//*[@id="root"]/main/div[2]/section[1]/button[12]')
+        browser.expect.element('//*[@id="root"]/main/div[1]/span').text.to.equal('3')
+        browser.click('//*[@id="root"]/main/div[2]/section[2]/button[4]')
+        browser.expect.element('//*[@id="root"]/main/div[1]/span').text.to.equal('0')
+        browser.click('//*[@id="root"]/main/div[2]/section[1]/button[12]')
+        browser.expect.element('//*[@id="root"]/main/div[1]/span').text.to.equal('3')
+        browser.pause(4000)
+        browser.click('//*[@id="root"]/main/div[2]/section[2]/button[5]')
+        browser.pause(1000)
+        browser.expect.element('//*[@id="root"]/main/div[1]/span').text.to.equal('6')
     }
 }
